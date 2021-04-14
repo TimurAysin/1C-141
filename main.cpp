@@ -191,7 +191,7 @@ private:
         GameState state = process_queue_.top();
         process_queue_.pop();
 
-        std::cout << state.GetPriority() << std::endl;
+//        std::cout << state.GetPriority() << std::endl;
 
         if (state.IsFinal()) {
             return true;
