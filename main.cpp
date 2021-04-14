@@ -53,6 +53,7 @@ public:
         return true;
     }
 
+    bool operator==(const GameState &other_state) const;
 private:
     void Validate();
 
@@ -125,7 +126,7 @@ int GameState::GetPriority() const {
             if (i == j) break;
 
             if (decks_[j].empty() || (decks_[i].back().rank - decks_[j].back().rank) == -1) {
-                potential += 500 * (decks_[j].size() + 1);
+                potential += 5000 * (decks_[j].size() + 1);
             }
         }
     }
@@ -135,6 +136,10 @@ int GameState::GetPriority() const {
 
 bool GameState::operator<(const GameState &other_state) const {
     return this->GetPriority() < other_state.GetPriority();
+}
+
+bool GameState::operator==(const GameState &other_state) const {
+    return this->GetPriority() == other_state.GetPriority();
 }
 
 void GameState::Validate() {
@@ -233,6 +238,8 @@ private:
                 }
             }
         }
+
+        hashes_processed_[state.GetHash()] = 1;
     }
 
     int number_of_decks_;
